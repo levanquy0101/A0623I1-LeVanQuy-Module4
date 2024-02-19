@@ -16,6 +16,6 @@
     <input type="text" placeholder="Nhập từ Tiếng Anh">
     <button type="submit">Dịch</button>
 </form>
-<p>${re}</p>
+<p>${result}</p>
 </body>
 </html>
