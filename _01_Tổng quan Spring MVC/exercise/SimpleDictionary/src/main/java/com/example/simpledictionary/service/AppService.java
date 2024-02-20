@@ -1,13 +1,21 @@
 package com.example.simpledictionary.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class AppService {
-    private static Map<String, String> listMap = new HashMap<>();
-    static {
-        listMap.put("red" , "đỏ");
-        listMap.put("blue" , "xanh");
-        listMap.put("yellow" , "vàng");
+@Service
+public class AppService{
+    private Map<String, String> dictionary;
+
+    public AppService() {
+        dictionary = new HashMap<>();
+        dictionary.put("hello", "xin chào");
+        dictionary.put("world", "thế giới");
+    }
+
+    public String translate(String englishWord) {
+        return dictionary.getOrDefault(englishWord.toLowerCase(), "Không tìm thấy từ trong từ điển.");
     }
 }
