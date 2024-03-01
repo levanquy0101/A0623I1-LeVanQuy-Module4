@@ -22,16 +22,16 @@
 console.log("File JS đã được nhúng!")
 
 // Modal trang xóa
-function openModal(Id){
-    let modal = document.getElementById(`myModal${Id}`);
-    console.log(Id);
+function openModal(idDelete){
+    let modal = document.getElementById(`myModal${idDelete}`);
+    console.log(idDelete);
     console.log(modal)
     modal.style.display = "block";
 }
 
-function closeModal(Id) {
-    let modal = document.getElementById(`myModal${Id}`);
-    console.log(Id);
+function closeModal(idDelete) {
+    let modal = document.getElementById(`myModal${idDelete}`);
+    console.log(idDelete);
     console.log(modal)
     modal.style.display = "none";
 }

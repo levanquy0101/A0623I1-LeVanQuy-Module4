@@ -29,12 +29,12 @@
         <section class="section">
             <div class="section-top">
                 <h2>Danh sách</h2>
-                <form action="/create" class="main-form">
+                <form action="Products/create" class="main-form">
                     <input type="hidden" name="action" value="search">
                     <input type="text" placeholder="Tìm kiếm" class="input-q1" name="name">
                     <button type="submit" class="button-search">Tìm kiếm</button>
                 </form>
-                <button class="button-add" onclick="window.location.href='/create'">Thêm mới</button>
+                <button class="button-add" onclick="window.location.href='Products/create'">Thêm mới</button>
                 <select name="" id="" class="select-q1">
                     <option value="" style="font-weight: bold" selected disabled>Sắp xếp theo</option>
                     <option value="">Tên A-Z</option>
@@ -55,17 +55,19 @@
                         <tr th:each="products: ${productList}">
                             <td th:text="${products.getId()}"></td>
                             <td th:text="${products.getName()}"></td>
-                            <td th:text="${products.getName()}"></td>
-                            <td th:text="${products.getName()}"></td>
+                            <td th:text="${products.getPrice()}"></td>
+                            <td th:text="${products.getAbout()}"></td>
                             <td>Xem chi tiết</td>
                             <td>
-                                <button class="button-edit" onclick="window.location.href='?action=update&id=${product.id}'"><img th:src="@{/static/img/edit.png}" alt="" class="icon-size"></button>
-                                <button class="button-delete" id="openModalBtn${product.id}" onclick="openModal(${product.id})"><img th:src="@{/static/img/delete.png}" alt="" class="icon-size"></button>
-                                <div id="myModal${product.id}" class="modal">
+                                <a th:href="@{/Products/{id}/update (id = ${products.getId()})}" class="button-edit">
+                                    <img th:src="@{/static/img/edit.png}" alt="" class="icon-size">
+                                </a>
+                                <button class="button-delete" th:attr="onclick=|openModal('${products.getId()}')|" ><img th:src="@{/static/img/delete.png}" alt="" class="icon-size"></button>
+                                <div th:id="'myModal' + ${products.getId()}" class="modal">
                                     <div class="modal-content">
-                                        <!-- <span class="close" id="closeModalBtn">&times;</span> -->
-                                        <p>Bạn thật sự muốn xóa ID = ${product.id}? Hành động này không thể hoàn tác !!!</p>
-                                        <button id="closeModalBtn${product.id}" class="button-close" onclick="closeModal(${product.id})">Trở lại</button>
+<!--                                        <p>Bạn thật sự muốn xóa ID = td:text="${products.getId()}"? Hành động này không thể hoàn tác !!!</p>-->
+                                        <p th:text="${products.getId()}"></p>
+                                        <button id="closeModalBtn${product.id}" class="button-close" th:attr="onclick=|closeModal('${products.getId()}')|">Trở lại</button>
                                         <button class="button-delconfirm" onclick="window.location.href='?action=delete&id=${product.id}'">Xác nhận</button>
                                     </div>
                                 </div>
