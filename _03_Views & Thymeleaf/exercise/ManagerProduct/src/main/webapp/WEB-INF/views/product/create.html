@@ -29,7 +29,7 @@
         <section class="section">
             <div class="main-form">
                 <h2>Tạo dữ liệu mới</h2>
-                <form action="" class="form" method="post" th:object="${productNew}">
+                <form action="/Products/create" class="form" method="post" th:object="${productNew}">
 <!--                    <input type="hidden" class="input-q1" placeholder="Nhập" name="id" th:field="*{id}">-->
                     <input type="text" class="input-q1" placeholder="Nhập" name="name" th:field="*{name}">
                     <input type="text" class="input-q1" placeholder="Nhập" name="price" th:field="*{price}">
