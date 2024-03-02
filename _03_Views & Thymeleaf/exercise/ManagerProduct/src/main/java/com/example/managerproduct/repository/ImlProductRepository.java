@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Repository
 public class ImlProductRepository implements IProductRepository{
     private static List<Product> productList;
@@ -25,12 +27,30 @@ public class ImlProductRepository implements IProductRepository{
 
     @Override
     public Product findById(Integer id) {
+        for (Product product : productList) {
+            if (Objects.equals(product.getId(), id)) {
+                return product;
+            }
+        }
         return null;
     }
 
     @Override
-    public void save(Product productNew) {
-        productList.add(productNew);
+    public void save(Product productNU) {
+        if (productNU.getId() == 0) {
+            // Nếu id là 0, tức là sản phẩm mới, thì thêm vào danh sách
+            int lastID = productList.get(productList.size()-1).getId();
+            productNU.setId(lastID+1);
+            productList.add(productNU);
+        } else {
+            // Nếu id đã tồn tại, cập nhật thông tin của sản phẩm
+            for (int i = 0; i < productList.size(); i++) {
+                if (productList.get(i).getId() == productNU.getId()) {
+                    productList.set(i, productNU);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Sửa dữ liệu</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
 </head>
 <body>
@@ -29,11 +29,11 @@
         <section class="section">
             <div class="main-form">
                 <h2>Sửa dữ liệu</h2>
-                <form action="" class="form" method="post">
-                    <%--          <input type="hidden" class="input-q1" name="id" value="${product.id}">--%>
-                    <input type="text" class="input-q1" placeholder="Nhập" name="name" value="${product.name}">
-                    <input type="text" class="input-q1" placeholder="Nhập" name="price" value="${product.price}">
-                    <input type="text" class="input-q1" placeholder="Nhập" name="about" value="${product.about}">
+                <form action="/Products/update" class="form" method="post" th:object="${product}">
+                    <input type="number" class="input-q1"  th:field="*{id}" readonly>
+                    <input type="text" class="input-q1" placeholder="Nhập" name="name" th:field="*{name}">
+                    <input type="text" class="input-q1" placeholder="Nhập" name="price" th:field="*{price}">
+                    <input type="text" class="input-q1" placeholder="Nhập" name="about" th:field="*{about}">
                     <button type="submit" class="submit">Sửa dữ liệu</button>
                 </form>
             </div>

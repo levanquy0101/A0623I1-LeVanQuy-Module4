@@ -7,7 +7,7 @@ public interface IProductRepository {
     List<Product> findAll();
     Product findById(Integer id);
 
-    void save(Product productNew);
+    void save(Product productNU);
 
     void update(Product productUpdate);
 

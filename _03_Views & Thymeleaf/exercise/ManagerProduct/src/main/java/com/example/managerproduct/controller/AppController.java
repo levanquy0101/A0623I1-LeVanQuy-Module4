@@ -1,7 +1,6 @@
 package com.example.managerproduct.controller;
 
 import com.example.managerproduct.model.Product;
-import com.example.managerproduct.repository.ImlProductRepository;
 import com.example.managerproduct.service.ImlProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +27,15 @@ public class AppController {
         model.addAttribute("productNew", new Product());
         return "product/create";
     }
-    @GetMapping("/update")
-    public String showUpdate(Model model){
-//        model.addAttribute("product", new Product());
+    @GetMapping("/{id}/update")
+    public String showUpdate(Model model, @PathVariable(name = "id") Integer id){
+        Product product = imlProductService.findById(id);
+        model.addAttribute("product", product);
         return "product/update";
     }
     @GetMapping("/{id}/delete")
     public String delete(Model model, @PathVariable(name = "id") Integer id){
         imlProductService.delete(id);
-//        model.addAttribute("message", "Xóa sinh viên thành công");
         return "redirect:/Products?ms=1";
     }
     @PostMapping("create")
@@ -45,9 +44,17 @@ public class AppController {
         if(bindingResult.hasErrors()) {
             return "product/create";
         }
+        product.setId(0);
         imlProductService.save(product);
-//        redirect.addFlashAttribute("message", "Thêm mới thành công");
-//       Redirect chuyển về trang list
+        return "redirect:/Products?ms=1";
+    }
+    @PostMapping("update")
+    public String update(@ModelAttribute("product") Product product, BindingResult bindingResult,
+                            RedirectAttributes redirect){
+        if(bindingResult.hasErrors()) {
+            return "product/update";
+        }
+        imlProductService.save(product);
         return "redirect:/Products?ms=1";
     }
 

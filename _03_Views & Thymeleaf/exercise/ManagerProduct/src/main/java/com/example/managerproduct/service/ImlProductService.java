@@ -17,12 +17,12 @@ public class ImlProductService implements IProductService{
 
     @Override
     public Product findById(Integer id) {
-        return null;
+        return productRepository.findById(id);
     }
 
     @Override
-    public void save(Product productNew) {
-        productRepository.save(productNew);
+    public void save(Product product) {
+        productRepository.save(product);
     }
 
     @Override
