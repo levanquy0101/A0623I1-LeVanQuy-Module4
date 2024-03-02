@@ -65,10 +65,9 @@
                                 <button class="button-delete" th:attr="onclick=|openModal('${products.getId()}')|" ><img th:src="@{/static/img/delete.png}" alt="" class="icon-size"></button>
                                 <div th:id="'myModal' + ${products.getId()}" class="modal">
                                     <div class="modal-content">
-<!--                                        <p>Bạn thật sự muốn xóa ID = td:text="${products.getId()}"? Hành động này không thể hoàn tác !!!</p>-->
-                                        <p th:text="${products.getId()}"></p>
+                                        <lable>Bạn thật sự muốn xóa ID: <p th:text="${products.getId()}"></p></lable>
                                         <button id="closeModalBtn${product.id}" class="button-close" th:attr="onclick=|closeModal('${products.getId()}')|">Trở lại</button>
-                                        <button class="button-delconfirm" onclick="window.location.href='?action=delete&id=${product.id}'">Xác nhận</button>
+                                        <a th:href="@{/Products/{id}/delete (id = ${products.getId()})}" class="button-delconfirm">Xác nhận</a>
                                     </div>
                                 </div>
                             </td>

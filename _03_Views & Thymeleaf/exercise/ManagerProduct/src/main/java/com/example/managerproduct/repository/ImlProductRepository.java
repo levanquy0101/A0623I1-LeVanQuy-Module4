@@ -30,7 +30,7 @@ public class ImlProductRepository implements IProductRepository{
 
     @Override
     public void save(Product productNew) {
-
+        productList.add(productNew);
     }
 
     @Override
@@ -40,7 +40,11 @@ public class ImlProductRepository implements IProductRepository{
 
     @Override
     public void delete(int idDel) {
-
+        for(int i=0;i<productList.size();i++){
+            if(productList.get(i).getId() == idDel){
+                productList.remove(productList.get(i));
+            }
+        }
     }
 
     @Override

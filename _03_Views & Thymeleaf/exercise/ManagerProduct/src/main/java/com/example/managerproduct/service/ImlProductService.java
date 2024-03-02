@@ -22,7 +22,7 @@ public class ImlProductService implements IProductService{
 
     @Override
     public void save(Product productNew) {
-
+        productRepository.save(productNew);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ImlProductService implements IProductService{
 
     @Override
     public void delete(int idDel) {
-
+        productRepository.delete(idDel);
     }
 
     @Override

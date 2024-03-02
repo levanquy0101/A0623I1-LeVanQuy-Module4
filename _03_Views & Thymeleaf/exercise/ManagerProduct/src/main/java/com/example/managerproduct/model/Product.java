@@ -4,9 +4,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Product {
-    private int id;
+    private Integer id;
     private String name;
-    private double price;
+    private Double price;
     private String about;
 
     public Product() {
@@ -19,7 +19,7 @@ public class Product {
         this.about = about;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
