@@ -33,8 +33,9 @@ public class ImlProductRepository implements IProductRepository {
     public void save(Product productN) {
         EntityTransaction entityTransaction = BaseRepository.entityManager.getTransaction();
         entityTransaction.begin();
-        BaseRepository.entityManager.merge(productN);
+        BaseRepository.entityManager.persist(productN);
         entityTransaction.commit();
+
     }
     @Transactional
     @Override

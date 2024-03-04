@@ -28,7 +28,7 @@ public class ImlProductService implements IProductService {
 
     @Override
     public void update(Product productUpdate) {
-
+        productRepository.update(productUpdate);
     }
 
     @Override

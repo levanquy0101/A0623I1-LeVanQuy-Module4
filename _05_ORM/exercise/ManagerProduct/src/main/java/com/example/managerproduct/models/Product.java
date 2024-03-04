@@ -56,4 +56,14 @@ public class Product {
     public void setAbout(String about) {
         this.about = about;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", about='" + about + '\'' +
+                '}';
+    }
 }
