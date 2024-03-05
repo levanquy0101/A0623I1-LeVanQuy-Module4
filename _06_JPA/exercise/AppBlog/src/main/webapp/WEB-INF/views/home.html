@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phần mềm quản lý</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+</head>
+<body>
+<div id="app">
+    <header id="header">
+        <h2>Phần mềm quản lý</h2>
+    </header>
+    <main id="main">
+        <aside class="aside">
+            <h2>Dashboards</h2>
+            <ul>
+                <li><a href="/blog">Default</a></li>
+                <li><a href="">Other</a></li>
+            </ul>
+            <h2>Bài viết mới nhất</h2>
+            <ul>
+                <li th:each="blog : ${blogList}">
+                    <a th:href="@{/blog/{id}(id=${blog.getId()})}" style="color: white" th:text="${blog.getTitle()}"></a>
+                </li>
+            </ul>
+
+        </aside>
+        <section class="section">
+            <div class="section-top">
+                <h1>Thông tin Blog</h1>
+                <form action="Products/create" class="main-form">
+                    <input type="hidden" name="action" value="search">
+                    <input type="text" placeholder="Tìm kiếm" class="input-q1" name="name-blog">
+                    <button type="submit" class="button-search">Tìm kiếm</button>
+                </form>
+                <button class="button-add" onclick="window.location.href='/blog/create'">Thêm mới</button>
+                <select name="" id="" class="select-q1">
+                    <option value="" style="font-weight: bold" selected disabled>Sắp xếp theo</option>
+                    <option value="">Tên A-Z</option>
+                    <option value="">Tên Z-A</option>
+                </select>
+            </div>
+            <div>
+                <button onclick="displayEdit()" class="button-edit">
+                    <img th:src="@{/static/img/edit.png}" alt="" class="icon-size">
+                </button>
+                <button class="button-delete" th:attr="onclick=|openModal('${blog.getId()}')|" ><img th:src="@{/static/img/delete.png}" alt="" class="icon-size"></button>
+                <div th:id="'myModal' + ${blog.getId()}" class="modal">
+                    <div class="modal-content">
+                        <lable>Bạn thật sự muốn xóa ID: <p th:text="${blog.getId()}"></p></lable>
+                        <button id="closeModalBtn${product.id}" class="button-close" th:attr="onclick=|closeModal('${blog.getId()}')|">Trở lại</button>
+                        <a th:href="@{/blog/{id}/delete (id = ${blog.getId()})}" class="button-delconfirm">Xác nhận</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="main-table" id="main-table">
+                <h3>Tác giả</h3>
+                <p th:text="${blog.author}"></p>
+                <h3>Tiêu đề</h3>
+                <p th:text="${blog.title}"></p>
+                <h3>Nội dung bài viết</h3>
+                <p th:text="${blog.content}"></p>
+            </div>
+            <div class="main-form" id="main-form">
+                <h2>Sửa bài Blog</h2>
+                <form action="/blog/update" class="form" method="post" th:object="${blog}">
+                    <input type="number" class="input-q1"  th:field="*{id}" readonly>
+                    <input type="text" class="input-q1" placeholder="Nhập tác giả"  th:field="*{author}">
+                    <input type="text" class="input-q1" placeholder="Nhập tiêu đề"  th:field="*{title}">
+                    <textarea name="" style="resize: vertical" cols="30" rows="5" class="input-q1" th:field="*{content}" placeholder="Nhập nội dung"></textarea>
+                    <button type="submit" class="submit">Sửa dữ liệu</button>
+                </form>
+            </div>
+            <div id="pagination" class="pagination"></div>
+            <div class="modal-alert" id="modal-alert">
+                <div class="modal-content-alert">
+                    <h2>Đã cập nhật lại danh sách</h2>
+                    <p class="tick">&#10003;</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <footer id="footer">
+
+    </footer>
+</div>
+<script th:src="@{/static/js/app.js}" defer></script>
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let ms = params.get('ms');
+    if (ms == 1) {
+        let displayModal = document.getElementById("modal-alert");
+        displayModal.style.display= "flex";
+    }
+</script>
+</body>
+</html>
