@@ -4,11 +4,13 @@ import com.example.managerproduct.models.Product;
 import com.example.managerproduct.repositories.IProductRepository;
 import com.example.managerproduct.repositories.impl.ImlProductRepository;
 import com.example.managerproduct.services.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class ImlProductService implements IProductService {
+    @Autowired
     private static IProductRepository productRepository = new ImlProductRepository();
 
     @Override

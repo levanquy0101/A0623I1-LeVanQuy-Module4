@@ -22,10 +22,7 @@ public class ImlProductRepository implements IProductRepository {
 
     @Override
     public Product findById(Integer id) {
-        EntityTransaction entityTransaction = BaseRepository.entityManager.getTransaction();
-        entityTransaction.begin();
         Product product = BaseRepository.entityManager.find(Product.class,id);
-        entityTransaction.commit();
         return product;
     }
     @Transactional
