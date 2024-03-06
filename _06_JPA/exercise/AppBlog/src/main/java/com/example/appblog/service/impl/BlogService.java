@@ -4,12 +4,14 @@ import com.example.appblog.model.Blog;
 import com.example.appblog.repository.IBlogRepository;
 import com.example.appblog.repository.impl.BlogRepository;
 import com.example.appblog.service.IBlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BlogService implements IBlogService {
+    @Autowired
     private IBlogRepository iBlogRepository = new BlogRepository();
     @Override
     public List<Blog> findAll() {

@@ -64,7 +64,7 @@ public class BlogController {
             return "/home";
         }
         iBlogService.update(blog);
-        return "redirect:/blog?ms=1";
+        String idUpdate = "/blog/" + blog.getId() + "?ms=1";
+        return "redirect:"+idUpdate;
     }
-
 }
