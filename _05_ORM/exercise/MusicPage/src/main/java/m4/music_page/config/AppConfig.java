@@ -74,9 +74,4 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return new org.hibernate.cfg.Configuration().configure("hibernate.conf.xml").buildSessionFactory();
     }
 
-//    @Bean
-//    public FilterRegistrationBean hiddenHttpMethodFilter(){
-//        FilterRegistrationBean filterResBean = new FilterRegistrationBean(new HiddenHttpMethodFilter());
-//        filterResBean.set
-//    }
 }

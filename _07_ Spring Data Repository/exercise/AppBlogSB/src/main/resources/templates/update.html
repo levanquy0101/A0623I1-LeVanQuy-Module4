@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa bài viết</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div id="app">
+    <header id="header">
+        <h2>Trang web Blog</h2>
+    </header>
+    <main id="main">
+        <aside class="aside">
+            <h2>Dashboards</h2>
+            <ul>
+                <li><a href="/blog">Default</a></li>
+                <li><a href="">Other</a></li>
+            </ul>
+        </aside>
+        <section class="section">
+            <div class="main-form">
+                <h2>Sửa bài Blog</h2>
+                <form action="/blogs/update" class="form" method="post" th:object="${blogForm}" novalidate="novalidate" enctype="multipart/form-data">
+                    <input type="number" class="input-q1" th:field="*{id}" readonly>
+                    <select class="input-q1" th:field="*{typePost}">
+                        <option th:each="typePost: ${typePosts}" th:value="${typePost.id}" th:text="${typePost.nameType}"></option>
+                    </select>
+                    <input type="text" class="input-q1" placeholder="Nhập tác giả"  th:field="*{author}">
+                    <input type="text" class="input-q1" placeholder="Nhập tiêu đề"  th:field="*{title}">
+                    <img th:if="${blogForm.imageUrl}" th:src="@{'/image/' + ${blogForm.imageUrl}}" alt="Ảnh đã chọn" class="input-q1">
+                    <input type="hidden" th:field="*{imageUrl}">
+                    <input type="file" class="input-q1" placeholder="Nhập địa chỉ hình ảnh" th:field="*{image}" accept="image/*">
+                    <textarea name="" style="resize: vertical" id="" cols="30" rows="5" class="input-q1" th:field="*{content}" placeholder="Nhập nội dung"></textarea>
+                    <button type="submit" class="submit">Sửa dữ liệu</button>
+                </form>
+            </div>
+            <div class="back">
+                <a href="/blogs">&larr; Trở về danh sách</a>
+            </div>
+        </section>
+    </main>
+    <footer id="footer">
+
+    </footer>
+</div>
+</body>
+</html>
