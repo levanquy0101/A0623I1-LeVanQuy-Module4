@@ -2,6 +2,8 @@ package com.example.appblogsb.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 
 @Entity(name = "blogs")
 public class Blog {
@@ -12,6 +14,8 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "code_type_post")
     private CategoryBlog typePost;
+    @Column
+    private LocalDate date;
     @Column
     private String author;
     @Column
@@ -24,15 +28,16 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(Long id, CategoryBlog typePost, String author, String title, String image, String content) {
+
+    public Blog(Long id, CategoryBlog typePost, LocalDate date, String author, String title, String image, String content) {
         this.id = id;
         this.typePost = typePost;
+        this.date = date;
         this.author = author;
         this.title = title;
         this.image = image;
         this.content = content;
     }
-
 
     public Long getId() {
         return id;
@@ -80,5 +85,13 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

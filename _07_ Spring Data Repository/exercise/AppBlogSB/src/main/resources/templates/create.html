@@ -26,6 +26,7 @@
                     <select class="input-q1" th:field="*{typePost}">
                         <option th:each="typePost: ${typePosts}" th:value="${typePost.id}" th:text="${typePost.nameType}"></option>
                     </select>
+                    <input type="date" class="input-q1" placeholder="Nhập ngày tạo bài viết" th:field="*{date}">
                     <input type="text" class="input-q1" placeholder="Nhập tác giả"  th:field="*{author}">
                     <input type="text" class="input-q1" placeholder="Nhập tiêu đề"  th:field="*{title}">
                     <input type="file" class="input-q1" placeholder="Nhập địa chỉ hình ảnh"  th:field="*{image}" accept="image/*">

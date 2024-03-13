@@ -27,6 +27,7 @@
                     <select class="input-q1" th:field="*{typePost}">
                         <option th:each="typePost: ${typePosts}" th:value="${typePost.id}" th:text="${typePost.nameType}"></option>
                     </select>
+                    <input type="date" class="input-q1" placeholder="Nhập ngày tạo bài viết" th:value="${currentDate}" name="date">
                     <input type="text" class="input-q1" placeholder="Nhập tác giả"  th:field="*{author}">
                     <input type="text" class="input-q1" placeholder="Nhập tiêu đề"  th:field="*{title}">
                     <img th:if="${blogForm.imageUrl}" th:src="@{'/image/' + ${blogForm.imageUrl}}" alt="Ảnh đã chọn" class="input-q1">

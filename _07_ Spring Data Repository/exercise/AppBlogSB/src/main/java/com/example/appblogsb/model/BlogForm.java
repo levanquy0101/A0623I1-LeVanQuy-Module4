@@ -3,9 +3,12 @@ package com.example.appblogsb.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+
 public class BlogForm {
     private Long id;
     private CategoryBlog typePost;
+    private LocalDate date;
     private String author;
     private String title;
     private MultipartFile image;
@@ -23,9 +26,10 @@ public class BlogForm {
     public BlogForm() {
     }
 
-    public BlogForm(Long id, CategoryBlog typePost, String author, String title, MultipartFile image, String content) {
+    public BlogForm(Long id, CategoryBlog typePost, LocalDate date, String author, String title, MultipartFile image, String content) {
         this.id = id;
         this.typePost = typePost;
+        this.date = date;
         this.author = author;
         this.title = title;
         this.image = image;
@@ -78,5 +82,13 @@ public class BlogForm {
 
     public void setTypePost(CategoryBlog typePost) {
         this.typePost = typePost;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

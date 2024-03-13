@@ -78,6 +78,8 @@ public class BlogController {
         BlogForm blogForm = new BlogForm();
         blogForm.setId(blog.getId());
         blogForm.setTypePost(blog.getTypePost());
+        blogForm.setDate(blog.getDate());
+        model.addAttribute("currentDate",blogForm.getDate());
         blogForm.setAuthor(blog.getAuthor());
         blogForm.setTitle(blog.getTitle());
         blogForm.setImageUrl(blog.getImage());
@@ -90,7 +92,7 @@ public class BlogController {
     public String saveProduct(@ModelAttribute BlogForm blogForm, RedirectAttributes redirectAttributes) throws IOException {
         MultipartFile multipartFile = blogForm.getImage();
         String fileName = blogService.saveImage(multipartFile);
-        Blog blog = new Blog(blogForm.getId(),blogForm.getTypePost(), blogForm.getAuthor(),
+        Blog blog = new Blog(blogForm.getId(),blogForm.getTypePost(),blogForm.getDate(), blogForm.getAuthor(),
                 blogForm.getTitle(), fileName, blogForm.getContent());
         blogService.save(blog);
         return "redirect:/blogs?ms=1";
@@ -108,11 +110,11 @@ public class BlogController {
         MultipartFile multipartFile = blogForm.getImage();
         if (!multipartFile.isEmpty()) {
             String fileName = blogService.saveImage(multipartFile);
-            Blog blog = new Blog(blogForm.getId(), blogForm.getTypePost(), blogForm.getAuthor(),
+            Blog blog = new Blog(blogForm.getId(), blogForm.getTypePost(),blogForm.getDate(), blogForm.getAuthor(),
                     blogForm.getTitle(), fileName, blogForm.getContent());
             blogService.save(blog);
         } else {
-            Blog blog = new Blog(blogForm.getId(), blogForm.getTypePost(), blogForm.getAuthor(),
+            Blog blog = new Blog(blogForm.getId(), blogForm.getTypePost(), blogForm.getDate(),blogForm.getAuthor(),
                     blogForm.getTitle(),blogForm.getImageUrl(), blogForm.getContent());
             blogService.save(blog);
         }
