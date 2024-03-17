@@ -18,7 +18,7 @@ public class User {
     @Size(min = 2, max = 45, message = "Họ phải có từ 2 đến 45 ký tự!")
     private String lastName;
     @Column
-    @NotNull(message = "Số điện thoại không được để trống!")
+    @NotBlank(message = "Số điện thoại không được để trống!")
     @Pattern(regexp = "\\d{10}", message = "Số điện thoại nhất định phải 10 số!")
     private String phone;
     @Column
@@ -27,10 +27,11 @@ public class User {
     private Integer age;
     @Column
     @NotBlank(message = "Email không được chứa khoảng cách!")
-    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Phải đúng định dạng email!")
+//    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Phải đúng định dạng email!")
+    @Email(message = "Phải đúng định dạng Email!")
     private String email;
     @Column
-    @NotBlank(message = "Mật khẩu không được để trống hoặc chứa khoảng cách!")
+    @NotBlank(message = "Mật khẩu không được để trống!")
     private String password;
 
     public User() {

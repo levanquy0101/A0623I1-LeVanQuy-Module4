@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        input{
+            margin-top: 10px;
+            padding: 8px;
+        }
+        select{
+            margin-top: 10px;
+        }
+        small{
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+<h2>Tạo mới bài hát</h2>
+<form action="" method="post" th:object="${song}">
+    <input type="text" placeholder="Nhập tên bài hát" th:field="*{nameSong}"><br>
+    <small th:if="${#fields.hasErrors('nameSong')}" th:errors="*{nameSong}"></small><br>
+
+    <input type="text" placeholder="Nhập nghệ sĩ thể hiện" th:field="*{artist}"><br>
+    <small th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}"></small><br>
+
+    <input type="text" placeholder="Nhập thể loại nhạc" th:field="*{categoryMusic}"><br>
+    <small th:if="${#fields.hasErrors('categoryMusic')}" th:errors="*{categoryMusic}"></small><br>
+
+    <input type="submit">
+    <input type="reset">
+</form>
+</body>
+</html>
