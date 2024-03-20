@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sách</title>
+    <style>
+        th, td{
+            border: 1px solid black;
+            padding: 0.5rem;
+        }
+        table{
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Danh sách Sách có trong thư viện</h2>
+<a href="/books/create">Thêm sách mới</a>
+<a href="/books/return">Trả sách</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Số lượng</th>
+            <th>Tùy chọn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="book : ${bookList}">
+            <td th:text="*{book.id}"></td>
+            <td th:text="*{book.name}"></td>
+            <td th:text="*{book.author}"></td>
+            <td th:text="*{book.quantity}"></td>
+            <td>
+                <a th:href="@{/books/{id}/detail (id = ${book.id})}">Chi tiết</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

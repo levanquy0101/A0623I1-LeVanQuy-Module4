@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+<h3>Result Page</h3>
+<hr>
+<div th:if="${message}">
+<h4>Bạn đã mượn thành công cuốn sách</h4>
+    <p>Your borrow code is: <strong th:text="${message}"></strong></p>
+</div>
+<div th:if="${returnBook}">
+    <h4>Thông báo!</h4>
+    <p th:text="${returnBook}"></p>
+</div>
+
+<a href="/books">Back to Home</a>
+</body>
+</html>
