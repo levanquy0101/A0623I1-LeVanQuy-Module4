@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phần mềm quản lý</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div id="app">
+  <header id="header">
+    <h2>Quản lý sản phẩm</h2>
+    <div class="cart-home">
+      <a href="/cart">
+      <span>Giỏ hàng</span>
+      </a>
+    </div>
+  </header>
+  <main id="main">
+    <aside class="aside">
+      <h2>D</h2>
+      <ul>
+        <li><a href="/product">Default</a></li>
+        <li><a href="">Other</a></li>
+      </ul>
+    </aside>
+    <section class="section">
+      <div class="section-top">
+        <h1>Chi tiết sản phẩm</h1>
+      </div>
+      <hr>
+
+      <div th:object="${product}" class="container-product">
+        <h3>Mã: </h3>
+        <p th:text="*{id}">Id</p>
+        <h3>Tên: </h3>
+        <p th:text="*{name}">Product Name</p>
+        <h3>Mô tả: </h3>
+        <p th:text="*{describeP}">Description</p>
+        <img width="20%" th:src="@{'/img/' + *{image}}" alt="Ảnh Product">
+        <h3>Giá: </h3>
+        <p th:text="*{price}">Price</p>
+        <a th:href="@{/product/{id}/add-cart (id = ${product.id})}">Thêm vào giỏ hàng</a>
+      </div>
+
+      <div id="pagination" class="pagination"></div>
+      <div class="modal-alert" id="modal-alert">
+        <div class="modal-content-alert">
+          <h2>Đã cập nhật lại dữ liệu</h2>
+          <p class="tick">&#10003;</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+
+  </footer>
+</div>
+<script th:src="@{/js/app.js}" defer></script>
+<script>
+  let params = new URLSearchParams(window.location.search);
+  let ms = params.get('ms');
+  if (ms == 1) {
+    let displayModal = document.getElementById("modal-alert");
+    displayModal.style.display= "flex";
+  }
+</script>
+</body>
+</html>

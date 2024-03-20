@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        input{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Tạo mới sách</h2>
+<form action="/books/create" th:object="${book}" method="post">
+  <input type="text" th:field="*{name}" placeholder="Nhập tên sách"><br>
+  <input type="text" th:field="*{author}" placeholder="Nhập tác giả"><br>
+  <input type="text" th:field="*{describe}" placeholder="Nhập mô tả sách"><br>
+  <input type="number" th:field="*{quantity}" placeholder="Nhập số lượng sách"><br>
+  <input type="submit" >
+  <input type="reset" >
+</form>
+</body>
+</html>

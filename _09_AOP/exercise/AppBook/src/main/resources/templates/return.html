@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trả sách</title>
+    <style>
+        input{
+            padding: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+<h3>Trang trả sách</h3>
+<form action="/books/return" method="post">
+  <input type="number" placeholder="Nhập mã trả sách" name="code_borrow">
+  <input type="submit" value="Trả sách">
+</form>
+<div th:if="${mess}">
+    <p th:text="${mess}"></p>
+</div>
+</body>
+</html>

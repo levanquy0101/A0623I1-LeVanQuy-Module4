@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phần mềm quản lý</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div id="app">
+  <header id="header">
+    <h2>Quản lý sản phẩm</h2>
+    <div class="cart-home">
+      <a href="/cart">
+        <span>Giỏ hàng</span>
+      </a>
+    </div>
+  </header>
+  <main id="main">
+    <aside class="aside">
+      <h2>D</h2>
+      <ul>
+        <li><a href="/product">Default</a></li>
+        <li><a href="">Other</a></li>
+      </ul>
+    </aside>
+    <section class="section">
+      <div class="section-top">
+        <a href="/product/create" class="button-add">Thêm mới</a>
+        <h1>Danh sách sản phẩm</h1>
+      </div>
+      <hr>
+
+      <div class="product-list" >
+        <div class="product" th:each="product : ${productList}">
+          <a th:href="@{/product/{id}/detail (id = ${product.id})}">
+            <figure>
+              <img width="100%" th:src="@{'/img/' + ${product.image}}" alt="Ảnh Product">
+            </figure>
+            <figcaption>
+              <p th:text="${product.name}"></p>
+              <span th:text="${product.price}"></span>
+            </figcaption>
+          </a>
+        </div>
+      </div>
+
+      <div id="pagination" class="pagination"></div>
+      <div class="modal-alert" id="modal-alert">
+        <div class="modal-content-alert">
+          <h2>Đã cập nhật lại dữ liệu</h2>
+          <p class="tick">&#10003;</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+
+  </footer>
+</div>
+<script th:src="@{/js/app.js}" defer></script>
+<script>
+  let params = new URLSearchParams(window.location.search);
+  let ms = params.get('ms');
+  if (ms == 1) {
+    let displayModal = document.getElementById("modal-alert");
+    displayModal.style.display= "flex";
+  }
+</script>
+</body>
+</html>
