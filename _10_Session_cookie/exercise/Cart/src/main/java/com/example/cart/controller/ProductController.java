@@ -49,13 +49,34 @@ public class ProductController {
         model.addAttribute("product",product);
         return "/detail";
     }
-    @GetMapping("/{id}/add-cart")
-    public String addTalk(Model model, @PathVariable(name = "id") Long id,
-                          @ModelAttribute("productCartList")List<Product> productCartList) {
-        Product product = iProductService.findById(id);
-        productCartList.add(product);
-        return "redirect:/product";
+//    @GetMapping("/{id}/add-cart")
+//    public String addCart(Model model, @PathVariable(name = "id") Long id,
+//                          @ModelAttribute("productCartList")List<Product> productCartList) {
+//        Product product = iProductService.findById(id);
+//        productCartList.add(product);
+//        return "redirect:/product";
+//    }
+@GetMapping("/{id}/add-cart")
+public String addCart(Model model, @PathVariable(name = "id") Long id,
+                      @ModelAttribute("productCartList") List<Product> productCartList) {
+    Product product = iProductService.findById(id);
+
+    boolean productExists = false;
+    for (Product cartProduct : productCartList) {
+        if (cartProduct.getId().equals(product.getId())) {
+            cartProduct.setQuantity(cartProduct.getQuantity() + 1);
+            productExists = true;
+            break;
+        }
     }
+    if (!productExists) {
+        product.setQuantity(1);
+        productCartList.add(product);
+    }
+
+    return "redirect:/product";
+}
+
     @ExceptionHandler(Exception.class)
     public String handleException() {
         return "error";
