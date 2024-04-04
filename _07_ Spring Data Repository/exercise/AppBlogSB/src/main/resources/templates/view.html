@@ -9,13 +9,15 @@
 <body>
 <div id="app">
   <header id="header">
-    <h2>Trang web Blog</h2>
+    <h2>Trang web bài viết</h2>
   </header>
   <main id="main">
     <aside class="aside">
       <h2>Dashboards</h2>
       <ul>
-        <li><a href="/blog">Default</a></li>
+        <li><a href="/blogs/">Default</a></li>
+        <li><a href="/blogs/category">Danh sách Category</a></li>
+        <li><a href="/blogs/list">Danh sách bài viết</a></li>
         <li><a href="">Other</a></li>
       </ul>
       <h2>Bài viết mới nhất</h2>
@@ -34,25 +36,6 @@
           <input type="text" placeholder="Tìm kiếm" class="input-q1" name="name-blog">
           <button type="submit" class="button-search">Tìm kiếm</button>
         </form>
-        <button class="button-add" onclick="window.location.href='/blogs/create'">Thêm mới</button>
-        <select name="" class="select-q1">
-          <option value="" style="font-weight: bold" selected disabled>Sắp xếp theo</option>
-          <option value="">Tên A-Z</option>
-          <option value="">Tên Z-A</option>
-        </select>
-      </div>
-      <div>
-          <a th:href="@{/blogs/{id}/update (id = ${blog.getId()})}" class="button-edit">
-            <img th:src="@{/image/edit.png}" alt="" class="icon-size">
-          </a>
-        <button class="button-delete" th:attr="onclick=|openModal('${blog.getId()}')|" ><img th:src="@{/image/delete.png}" alt="" class="icon-size"></button>
-        <div th:id="'myModal' + ${blog.getId()}" class="modal">
-          <div class="modal-content">
-            <lable>Bạn thật sự muốn xóa ID: <p th:text="${blog.getId()}"></p></lable>
-            <button id="closeModalBtn${product.id}" class="button-close" th:attr="onclick=|closeModal('${blog.getId()}')|">Trở lại</button>
-            <a th:href="@{/blogs/{id}/delete (id = ${blog.getId()})}" class="button-delconfirm">Xác nhận</a>
-          </div>
-        </div>
       </div>
       <hr>
       <div class="main-table" id="main-table">
@@ -76,22 +59,6 @@
         </div>
       </div>
     </section>
-    <aside class="aside aside2">
-      <h2>Danh mục bài viết</h2>
-      <nav>
-        <ul style="display: flex">
-          <li th:each="catelgory:${typePosts}">
-            <a th:href="@{/blogs/types/{id}(id=${catelgory.id})}" style="color: white" th:text="${catelgory.nameType}"></a>
-          </li>
-        </ul>
-      </nav>
-      <p style="color: white">Phần bài viết cho loại 1</p>
-      <ul>
-        <li th:each="blog1:${blogsNum1}">
-          <a th:href="@{/blogs/listType/{id}(id=${blog1.id})}" th:text="${blog1.title}"></a>
-        </li>
-      </ul>
-    </aside>
   </main>
   <footer id="footer">
 

@@ -20,7 +20,7 @@ public class CategoryBlogService implements ICategoryBlogService {
 
     @Override
     public CategoryBlog findById(Long id) {
-        return null;
+        return categoryBlogRepository.findById(id).orElse(null);
     }
 
     @Override

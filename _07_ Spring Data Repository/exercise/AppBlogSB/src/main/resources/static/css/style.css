@@ -42,21 +42,20 @@ body{
     height: 90%;
 }
 .aside{
-    width: 15%;
+    width: 20%;
     height: 100%;
     background-color: aliceblue;
-    padding: 1rem;
-    padding-right: 0;
+    padding: 1rem 0 1rem 1rem;
     background-image: linear-gradient(#0e2163, #2a0435);
     opacity: 0.9;
     background-position: center;
     background-repeat: no-repeat;
 }
-.aside2{
-    width: 25%;
-    background-color: #181a51;
-    background-image: none;
-}
+/*.aside2{*/
+/*    width: 25%;*/
+/*    background-color: #181a51;*/
+/*    background-image: none;*/
+/*}*/
 .aside h2{
     color: #93c5fd;
 }
@@ -71,7 +70,7 @@ body{
 
 }
 .section{
-    width: 60%;
+    width: 80%;
     height: 100%;
     background-color: rgb(255, 255, 255,0.6);
     padding: 20px;
@@ -91,6 +90,7 @@ body{
 }
 
 /* ------------------------------Template Table----------------------------------- */
+
 .main-table h2{
     color: #0e2163;
 }
@@ -98,6 +98,21 @@ body{
     width: 100%;
     border-collapse: collapse;
     /*table-layout: fixed;*/
+}
+.category{
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    padding: 6px;
+
+}
+.category > div > a{
+    padding: 8px;
+    background-color: yellow;
+    border-radius: 4px;
+    display: inline-block;
+    color: black;
+
 }
 .main-table .table thead th{
     background-color: rgba(4, 68, 124, 0.982);

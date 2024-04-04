@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -25,35 +24,20 @@ public class BlogController {
     @Autowired
     private ICategoryBlogService categoryBlogService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String getAllBlogs(Model model) {
         try{
         List<Blog> blogList = blogService.findAll();
-        Collections.reverse(blogList);
         model.addAttribute("blogList", blogList);
-        Blog blogLast= blogList.get(0);
-        if(blogLast != null){
-            model.addAttribute("blog", blogLast);
-        }
         }catch (Exception e){
             System.out.println("Không tìm thấy bản ghi nào"+e);
         }
-
-        //Danh sách loại bài viết
-        model.addAttribute("typePosts",categoryBlogService.findAll());
-        List<Blog> blogsNum1= blogService.findAll();
-        model.addAttribute("blogsNum1",blogsNum1);
-//        model.addAttribute()
-
-        return "home";
+        return "blog_list";
     }
 
     @GetMapping( "/{id}")
     public String getBlogById(@PathVariable Long id, Model model) {
         try{
-            List<Blog> blogList = blogService.findAll();
-            Collections.reverse(blogList);
-            model.addAttribute("blogList", blogList);
             Blog blog = blogService.findById(id);
             if(blog != null){
                 model.addAttribute("blog", blog);
@@ -62,7 +46,7 @@ public class BlogController {
         }catch (Exception e){
             System.out.println("Không tìm thấy bản ghi nào"+e);
         }
-        return "home";
+        return "view";
     }
 
     @GetMapping("/create")
@@ -95,13 +79,13 @@ public class BlogController {
         Blog blog = new Blog(blogForm.getId(),blogForm.getTypePost(),blogForm.getDate(), blogForm.getAuthor(),
                 blogForm.getTitle(), fileName, blogForm.getContent());
         blogService.save(blog);
-        return "redirect:/blogs?ms=1";
+        return "redirect:/blogs/list?ms=1";
     }
 
     @GetMapping ("/{id}/delete")
     public String deleteBlog(@PathVariable Long id) {
         blogService.deleteById(id);
-        return "redirect:/blogs";
+        return "redirect:/blogs/list";
     }
 
 
@@ -118,7 +102,7 @@ public class BlogController {
                     blogForm.getTitle(),blogForm.getImageUrl(), blogForm.getContent());
             blogService.save(blog);
         }
-        return "redirect:/blogs?ms=1";
+        return "redirect:/blogs/list?ms=1";
     }
 
 }

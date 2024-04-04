@@ -1,6 +1,7 @@
 package com.example.appblogsb.service.impl;
 
 import com.example.appblogsb.model.Blog;
+import com.example.appblogsb.model.CategoryBlog;
 import com.example.appblogsb.repository.BlogRepository;
 import com.example.appblogsb.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class BlogService implements IBlogService {
     @Override
     public List<Blog> findAll() {
         return blogRepository.findAll();
+    }
+
+    @Override
+    public List<Blog> findAllByTypePost(CategoryBlog typePost) {
+        return blogRepository.findAllByTypePost(typePost);
     }
 
     @Override

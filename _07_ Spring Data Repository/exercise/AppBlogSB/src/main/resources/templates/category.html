@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phần mềm quản lý</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div id="app">
+    <header id="header">
+        <h2>Trang web bài viết</h2>
+    </header>
+    <main id="main">
+        <aside class="aside">
+            <h2>Dashboards</h2>
+            <ul>
+                <li><a href="/blogs/">Default</a></li>
+                <li><a href="/blogs/category">Danh sách Category</a></li>
+                <li><a href="/blogs/list">Danh sách bài viết</a></li>
+                <li><a href="">Other</a></li>
+            </ul>
+        </aside>
+        <section class="section">
+            <div class="section-top">
+                <h1>Thông tin Blog</h1>
+                <form action="Products/create" class="main-form">
+                    <input type="hidden" name="action" value="search">
+                    <input type="text" placeholder="Tìm kiếm" class="input-q1" name="name-blog">
+                    <button type="submit" class="button-search">Tìm kiếm</button>
+                </form>
+                <button class="button-add" onclick="window.location.href='/blogs/create'">Thêm mới</button>
+                <select name="" class="select-q1">
+                    <option value="" style="font-weight: bold" selected disabled>Sắp xếp theo</option>
+                    <option value="">Tên A-Z</option>
+                    <option value="">Tên Z-A</option>
+                </select>
+            </div>
+            <hr>
+            <div class="main-table">
+                <div class="category">
+                    <div th:each="category : ${categoryList}">
+                        <a th:href="@{'/category/' + ${category.id}}" th:text="${category.nameType}"></a>
+                    </div>
+                </div>
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tiêu đề</th>
+                        <th>Tác giả</th>
+                        <th>Ngày tạo bài viết</th>
+                        <th>Địa chỉ ảnh</th>
+                        <th>Nội dung</th>
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="blog : ${blogList}">
+                        <td th:text="${blog.id}"></td>
+                        <td th:text="${blog.title}"></td>
+                        <td th:text="${blog.author}"></td>
+                        <td th:text="${blog.date}"></td>
+                        <td th:text="${blog.image}"></td>
+                        <td th:text="${blog.content}"></td>
+                        <td>
+                            <div>
+                                <a th:href="@{/blogs/{id}(id = ${blog.getId()})}" class="button-edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28px" class="ionicon" viewBox="0 0 512 512"><path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
+                                </a>
+                                <a th:href="@{/blogs/{id}/update (id = ${blog.getId()})}" class="button-edit">
+                                    <img th:src="@{/image/edit.png}" alt="" class="icon-size">
+                                </a>
+                                <button class="button-delete" th:attr="onclick=|openModal('${blog.getId()}')|" ><img th:src="@{/image/delete.png}" alt="" class="icon-size"></button>
+                                <div th:id="'myModal' + ${blog.getId()}" class="modal">
+                                    <div class="modal-content">
+                                        <lable>Bạn thật sự muốn xóa ID: <p th:text="${blog.getId()}"></p></lable>
+                                        <button id="closeModalBtn${product.id}" class="button-close" th:attr="onclick=|closeModal('${blog.getId()}')|">Trở lại</button>
+                                        <a th:href="@{/blogs/{id}/delete (id = ${blog.getId()})}" class="button-delconfirm">Xác nhận</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="pagination" class="pagination"></div>
+            <div class="modal-alert" id="modal-alert">
+                <div class="modal-content-alert">
+                    <h2>Đã cập nhật lại dữ liệu</h2>
+                    <p class="tick">&#10003;</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="footer">
+
+    </footer>
+</div>
+<script th:src="@{/js/app.js}" defer></script>
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let ms = params.get('ms');
+    if (ms == 1) {
+        let displayModal = document.getElementById("modal-alert");
+        displayModal.style.display= "flex";
+    }
+</script>
+</body>
+</html>
